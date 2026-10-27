@@ -9,7 +9,7 @@ data class BookResponse(
 
 @Serializable
 data class BookItem(
-    val id: String,
+    val id: String? = null,
     val volumeInfo: VolumeInfo? = null
 )
 

@@ -1,5 +1,6 @@
 package com.example.bookshelf.ui.screens
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -43,10 +44,13 @@ class BooksViewModel(
                 val list = booksRepository.getBooks(query)
                 BooksUiState.Success(list)
             } catch (e: IOException) {
+                Log.e("BooksViewModel", "IOException fetching books", e)
                 BooksUiState.Error
             } catch (e: HttpException) {
+                Log.e("BooksViewModel", "HttpException fetching books", e)
                 BooksUiState.Error
             } catch (e: Exception) {
+                Log.e("BooksViewModel", "Exception fetching books", e)
                 BooksUiState.Error
             }
         }
