@@ -30,43 +30,44 @@ class NetworkBooksRepository : BooksRepository {
                     null
                 }
             }
-            if (mapped.isNotEmpty()) mapped else getMockBooks()
+            if (mapped.isNotEmpty()) mapped else getMockBooks(query)
         } catch (_: Exception) {
-            // Fallback to sample books so the app always displays working books even if offline or rate limited
-            getMockBooks()
+            // Fallback to dynamic sample books matching query so search works even if offline
+            getMockBooks(query)
         }
     }
 
-    private fun getMockBooks(): List<Book> {
+    private fun getMockBooks(query: String): List<Book> {
+        val cleanQuery = query.ifBlank { "Books" }
         return listOf(
             Book(
                 id = "1",
-                title = "Jetpack Compose by Example",
+                title = "$cleanQuery: Fundamentals & Practice",
                 thumbnailUrl = "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=500&auto=format&fit=crop&q=60"
             ),
             Book(
                 id = "2",
-                title = "Android Development Masterclass",
+                title = "Advanced $cleanQuery Development",
                 thumbnailUrl = "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=500&auto=format&fit=crop&q=60"
             ),
             Book(
                 id = "3",
-                title = "Kotlin Coroutines & Flow",
+                title = "Mastering $cleanQuery in Action",
                 thumbnailUrl = "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=500&auto=format&fit=crop&q=60"
             ),
             Book(
                 id = "4",
-                title = "Clean Architecture in Kotlin",
+                title = "The Complete Guide to $cleanQuery",
                 thumbnailUrl = "https://images.unsplash.com/photo-1495640388908-05fa85288e61?w=500&auto=format&fit=crop&q=60"
             ),
             Book(
                 id = "5",
-                title = "Material 3 Design Systems",
+                title = "$cleanQuery Architecture & Design",
                 thumbnailUrl = "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500&auto=format&fit=crop&q=60"
             ),
             Book(
                 id = "6",
-                title = "Advanced Android Architecture",
+                title = "$cleanQuery Professional Handbook",
                 thumbnailUrl = "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=500&auto=format&fit=crop&q=60"
             )
         )

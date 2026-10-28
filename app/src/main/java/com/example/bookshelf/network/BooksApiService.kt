@@ -12,10 +12,11 @@ private const val BASE_URL = "https://www.googleapis.com/books/v1/"
 
 private val json = Json {
     ignoreUnknownKeys = true
+    isLenient = true
 }
 
 private val retrofit = Retrofit.Builder()
-    .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+    .addConverterFactory(json.asConverterFactory("application/json; charset=utf-8".toMediaType()))
     .baseUrl(BASE_URL)
     .build()
 
